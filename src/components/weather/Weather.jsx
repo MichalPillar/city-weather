@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Weather = () => (
+const Weather = ({ city }) => (
   <div className="container">
-    Weather
+    {city.name}
   </div>
 )
 
