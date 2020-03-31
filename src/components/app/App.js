@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import SearchForm from '../searchform/SearchForm';
@@ -9,6 +9,18 @@ import './App.scss';
 function App() {
   const [city, setCity] = useState({});
   const [searchStr, setSearchStr] = useState('');
+
+  useEffect(() => {
+    const corsUrl = 'https://cors-anywhere.herokuapp.com/';
+    const sampleUrl = `${corsUrl}https://samples.openweathermap.org/data/2.5/weather?q=London&appid=b6907d289e10d714a6e88b30761fae22`;
+
+    axios
+      .get(sampleUrl)
+      .then(response => {
+        const cityObj = response.data;
+        setCity(cityObj);
+      })
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
