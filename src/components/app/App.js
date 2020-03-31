@@ -6,22 +6,23 @@ import Weather from '../weather/Weather';
 
 import './App.scss';
 
-function App() {
+const App = () => {
   const [city, setCity] = useState({});
   const [searchStr, setSearchStr] = useState('');
 
+  async function loadCity() {
+    const cityObj = await weatherService.getSampleData();
+    setCity(cityObj);
+  }
+
   useEffect(() => {
-    weatherService
-      .getSampleData()
-      .then(cityObj => setCity(cityObj))
+    loadCity();
   }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    weatherService
-      .getSampleData()
-      .then(cityObj => setCity(cityObj))
+    loadCity();
     setSearchStr('');
   }
 
